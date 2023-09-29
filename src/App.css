@@ -1,0 +1,65 @@
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+.login-page {
+  background-image: linear-gradient(
+    to right top,
+    #3f382f,
+    #433c31,
+    #484034,
+    #4c4536,
+    #504939,
+    #5d5440,
+    #6b6046,
+    #796c4d,
+    #97835a,
+    #b79a67,
+    #d8b174,
+    #fcc883
+  );
+}
+.bg-home {
+  background-image: linear-gradient(
+    to right top,
+    #1c1c1c,
+    #1e1e1e,
+    #201f20,
+    #232021,
+    #252222,
+    #272423,
+    #292625,
+    #2a2826,
+    #2c2a28,
+    #2e2c2b,
+    #302f2d,
+    #323130
+  );
+}
+
+.bg-image-left {
+  background-image: url("./assets/javier-allegue-barros-55bVEzGVnzY-unsplash.jpg");
+  background-size: cover;
+  background-position: left;
+}
+.bg-image-center {
+  background-image: url("./assets/javier-allegue-barros-55bVEzGVnzY-unsplash.jpg");
+  background-size: cover;
+  background-position: top;
+}
+
+/* .scrollbar-thin::-webkit-scrollbar {
+  width: 2px;
+  height: 4px; 
+}
+
+.scrollbar-thumb-black::-webkit-scrollbar-thumb {
+  background-color: #000;
+}
+
+.scrollbar-track-gray-300::-webkit-scrollbar-track {
+  background-color: #ccc; 
+} */
