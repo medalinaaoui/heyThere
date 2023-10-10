@@ -277,13 +277,13 @@ const Post = ({ fetchPosts, post, fromprofile }) => {
           <div className="flex  justify-between">
             <input
               type="text"
-              className="w-full px-2 rounded-l-sm outline-none"
+              className="w-full px-2 rounded-l-md outline-none"
               placeholder="Write a comment"
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
             <button
-              className="btn btn-primary btn-sm rounded-r-sm rounded-none"
+              className="px-2 rounded-r-md bg-accentc text-backg hover:bg-thatcolor  duration-300"
               onClick={addComment}
             >
               Sent

@@ -9,7 +9,6 @@ import { SlOptions } from "react-icons/sl";
 const Comment = ({ comment, fetchComments }) => {
   const userComments = useSelector((state) => state.auth.user.comments);
   const user_id = useSelector((state) => state.auth.user.id);
-  const profilePic = comment.profilePic || emptyPp;
   const dbDate = parseISO(comment.created_at);
   const timeAgo = formatDistance(dbDate, new Date(), {
     addSuffix: true,
@@ -55,7 +54,7 @@ const Comment = ({ comment, fetchComments }) => {
     <div className="flex justify-between">
       <div className="flex gap-6 items-start">
         <img
-          src={profilePic}
+          src={`../../public/upload/${comment.profilePic}`}
           alt="profilepic"
           className=" w-8 aspect-square rounded-full"
         />

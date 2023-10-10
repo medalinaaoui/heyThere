@@ -3,6 +3,7 @@ body {
   margin: 0;
   box-sizing: border-box;
   height: 100vh;
+  scroll-behavior: smooth;
 }
 
 .login-page {
@@ -84,3 +85,11 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+input {
+  @apply bg-dark text-thatcolor py-[0.3rem] outline-none;
+}
+
+/* .btn {
+  @apply px-2 rounded-md bg-accentc text-backg hover:bg-thatcolor  duration-300;
+} */

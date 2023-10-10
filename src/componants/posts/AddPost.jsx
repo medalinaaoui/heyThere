@@ -63,9 +63,9 @@ const AddPost = ({ fetchPosts }) => {
   };
 
   return (
-    <article className="bg-backg m-8 rounded-md py-3">
+    <article className=" bg-backg m-8 py-6  px-2 sm:py-0 rounded-md sm:flex sm:flex-row flex-col justify-center sm:justify-between text-center sm:items-center">
       <div className="flex justify-between px-2">
-        <div className="flex gap-2 items-center">
+        <div className="flex gap-2 items-center relative">
           <img
             src={`../../public/upload/${profilePic}`}
             alt="profilepic"
@@ -74,9 +74,10 @@ const AddPost = ({ fetchPosts }) => {
           <div className="flex flex-col">
             <h2 className=" text-sm truncate">{username}</h2>
           </div>
+          <div className="h-3 w-3 rounded-full bg-green-500 absolute top-6 right-10"></div>
         </div>
       </div>
-      <div className="px-2 p-3 relative">
+      <div className="px-2 p-3 relative flex-1">
         <input
           value={post}
           onChange={(event) => {
@@ -86,7 +87,7 @@ const AddPost = ({ fetchPosts }) => {
           className="  w-full text-sm p-2 rounded-xl"
           placeholder="What's on your mind? "
         />
-        <div className="flex items-center justify-center absolute top-16 right-2">
+        <div className="flex items-center justify-center absolute right-4 bottom-[1.1rem]">
           <label className="">
             <IoImages className="text-2xl text-accentc" />
             <input
@@ -100,12 +101,14 @@ const AddPost = ({ fetchPosts }) => {
           </label>
         </div>
       </div>
-      <button
-        className="btn btn-sm btn-primary px-2 mx-2"
-        onClick={handleAddPost}
-      >
-        Post
-      </button>
+      <div className="px-2 sm:px-0 h-full ">
+        <button
+          className=" sm:px-2 sm:w-fit py-1 w-full  rounded-md  bg-accentc  text-backg hover:bg-thatcolor  duration-300 sm:ml-2 font-semibold"
+          onClick={handleAddPost}
+        >
+          Post
+        </button>
+      </div>
     </article>
   );
 };

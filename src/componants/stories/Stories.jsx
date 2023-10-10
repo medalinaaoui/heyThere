@@ -2,7 +2,7 @@ import { storiesData } from "../../data";
 import Story from "./Story";
 import { activeUser } from "../../data";
 import { AiFillPlusCircle } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../hooks/usePrivateAxios";
 import useAxiosPrivate2 from "../../hooks/usePrivateAxios2";
 import toast from "react-hot-toast";
@@ -11,7 +11,26 @@ const Stories = () => {
   const privateAxios = useAxiosPrivate();
   const privateAxiosTwo = useAxiosPrivate2();
   const [story, setStory] = useState("");
+  const [stories, setStories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const user_id = useSelector((state) => state.auth.user.id);
+
+  const fetchStories = async () => {
+    try {
+      const response = await privateAxios.get("/stories");
+      console.log(response.data);
+      setStories(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      if (error) console.log("error from Stories try catch: ", error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchStories();
+  }, []);
+
   const upload = async () => {
     try {
       const formData = new FormData();
@@ -91,12 +110,15 @@ const Stories = () => {
         <span className="text-sm  text-white ">Your story</span>
         <button onClick={handleAddStory}>Add Story</button>
       </div>
-
-      <div className="flex gap-1">
-        {storiesData.map((s, i) => (
-          <Story story={s} />
-        ))}
-      </div>
+      {isLoading ? (
+        <div> Loading...</div>
+      ) : (
+        <div className="flex gap-1">
+          {stories.map((s, i) => (
+            <Story story={s} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
