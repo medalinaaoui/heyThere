@@ -1,5 +1,4 @@
 import SectionItem from "./SectionItem";
-
 const LeftbarSection = ({ section }) => {
   return (
     <section>

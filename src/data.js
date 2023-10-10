@@ -64,7 +64,7 @@ export const leftBarSections = [
       {
         head: "Settings",
         icon: AiFillSetting,
-        link: "",
+        link: "/settings/user",
       },
     ],
   },

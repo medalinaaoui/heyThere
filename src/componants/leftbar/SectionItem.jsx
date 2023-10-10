@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const SectionItem = ({ item }) => {
+  const userId = useSelector((state) => state.auth.user.id);
   return (
     <li className="">
-      <Link to={item.link} className="flex gap-8 items-center group ">
+      <Link
+        to={`${item.link}/${userId}`}
+        className="flex gap-8 items-center group "
+      >
         <span>
           {
             <item.icon className=" text-4xl text-accentc group-hover:text-textc" />

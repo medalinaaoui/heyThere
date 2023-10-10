@@ -1,18 +1,20 @@
 const Story = ({ story }) => {
   return (
-    <div
-      className="relative w-[5.4rem] h-32 "
-      style={{ flexShrink: 0 }}
-      id="custom-scrollbar"
-    >
-      <img
-        src={story.personPic}
-        alt="storyPic"
-        className="bg-cover w-[5.4rem] h-32 rounded-md border-[1px] border-blue-500"
-      />
-      <span className="text-sm absolute bottom-0 left-2 text-white ">
-        {story.personName}
-      </span>
+    <div className="relative flex flex-col items-center">
+      <div class="w-[4.4rem] h-[4.4rem] border-2 border-blue-500 rounded-full"></div>
+
+      <div
+        className="w-16 h-16 rounded-full overflow-hidden absolute inset-[0.2rem] "
+        style={{ flexShrink: 0 }}
+        id="custom-scrollbar"
+      >
+        <img
+          src={story.personPic}
+          alt="storyPic"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <span className="text-sm  text-white ">{story.personName}</span>
     </div>
   );
 };

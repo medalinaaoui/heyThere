@@ -16,12 +16,16 @@ export default {
         gray: "#6C757D",
         light: "#F8F9FA",
         dark: "#343A40",
+        thatcolor: "#a0a7b4",
       },
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
         lora: ["lora", "serif"],
       },
+      aspectRatio: {
+        story: "9 / 0.375",
+      },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [],
 };

@@ -1,26 +1,54 @@
+import { lazy, Suspense } from "react";
 import "./index.css";
 import "./App.css";
+import { Toaster } from "react-hot-toast";
+import { useSelector } from "react-redux";
+import StayLoggedIn from "./pages/StayLoggedIn";
+// import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import useAxiosPrivate from "./hooks/usePrivateAxios";
+import { logout } from "./features/user/userSlice";
+import { useState } from "react";
+
 import {
   createBrowserRouter,
   RouterProvider,
   Outlet,
   Navigate,
 } from "react-router-dom";
-import { Navbar, Leftbar, Rightbar } from "./componants/index";
-import { Profile, Home, Login, Register } from "./pages/index";
-import store from "./store";
-import { Provider } from "react-redux";
+const Navbar = lazy(() => import("./componants/navbar/Navbar"));
+const Leftbar = lazy(() => import("./componants/leftbar/Leftbar"));
+const Rightbar = lazy(() => import("./componants/rightbar/Rightbar"));
+const UserSettings = lazy(() => import("./pages/UserSettings"));
+const Profile = lazy(() => import("./pages/Profile"));
+const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
+const LogoutCheck = lazy(() => import("./pages/LogoutCheck"));
+
 function App() {
-  // const currUserStatus = true;
-  // const ProtectedRoute = ({ element }) => {
-  //   if (!currUserStatus) return <Navigate to="/login" />;
-  //   return element;
-  // };
+  // const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const privateAxios = useAxiosPrivate();
+
+  // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const [showLogoutCheck, setShowLogoutCheck] = useState(false);
+  const [confirm, setConfirm] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await privateAxios.get("/logout");
+      dispatch(logout());
+      setConfirm(true);
+    } catch (error) {
+      console.log("error from app handleLogout: ", error);
+    }
+  };
 
   const Layout = () => {
     return (
       <div className=" bg-home flex flex-col ">
-        <Navbar />
+        <Navbar setShowLogoutCheck={setShowLogoutCheck} confirm={confirm} />
         <div className="flex justify-between">
           <Leftbar />
           <Outlet />
@@ -33,7 +61,13 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Layout />,
+      element: (
+        <StayLoggedIn>
+          <Suspense fallback={<div> Loading... </div>}>
+            <Layout />
+          </Suspense>
+        </StayLoggedIn>
+      ),
       children: [
         {
           path: "/",
@@ -53,14 +87,33 @@ function App() {
       path: "/register",
       element: <Register />,
     },
+    {
+      path: "/settings/user/:id",
+      element: (
+        <StayLoggedIn>
+          <Suspense fallback={<div> Loading... </div>}>
+            <UserSettings />
+          </Suspense>
+        </StayLoggedIn>
+      ),
+    },
   ]);
 
   return (
-    <Provider store={store}>
-      <div className="font-roboto h-full">
-        <RouterProvider router={router} />
-      </div>
-    </Provider>
+    <div className="font-roboto h-full text-thatcolor">
+      <Toaster />
+
+      <RouterProvider router={router} />
+
+      {showLogoutCheck && (
+        <Suspense fallback={<>Loading...</>}>
+          <LogoutCheck
+            onConfirm={handleLogout}
+            onCancel={() => setShowLogoutCheck(false)}
+          />
+        </Suspense>
+      )}
+    </div>
   );
 }
 export default App;

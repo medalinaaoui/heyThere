@@ -2,9 +2,16 @@ import { AiFillHome } from "react-icons/ai";
 import { FaMoon, FaUserAlt, FaSearch } from "react-icons/fa";
 import { BiMessageSquare, BiMenuAltRight } from "react-icons/bi";
 import { IoIosNotifications } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AiOutlineLogout } from "react-icons/ai";
 
-const Navbar = () => {
+const Navbar = ({ setShowLogoutCheck, confirm }) => {
+  const navigate = useNavigate();
+
+  if (confirm) {
+    navigate("/login");
+  }
+
   return (
     <nav className="flex justify-between px-8 md:px-16 py-4 border-accentc bg-backg sticky top-0 z-50">
       <div className="flex justify-between md:w-auto w-full gap-6 items-center text-accentc">
@@ -33,9 +40,13 @@ const Navbar = () => {
         </div>
       </div>
       <div className="md:flex hidden gap-6 items-center text-accentc">
-        <FaUserAlt className="text-xl" />
-        <BiMessageSquare className="text-2xl" />
-        <IoIosNotifications className="text-2xl font-bold" />
+        <FaUserAlt className="text-xl cursor-pointer" />
+        <BiMessageSquare className="text-2xl cursor-pointer" />
+        <IoIosNotifications className="text-2xl font-bold cursor-pointer" />
+        <AiOutlineLogout
+          className="text-2xl font-bold cursor-pointer"
+          onClick={() => setShowLogoutCheck(true)}
+        />
       </div>
     </nav>
   );

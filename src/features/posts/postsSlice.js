@@ -76,10 +76,10 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    addPost(state, action) {
+    addPost: (state, action) => {
       return [...state, action.payload];
     },
-    addComment(state, action) {
+    addComment: (state, action) => {
       const [postId, comment] = action.payload;
 
       // Create a new state array with the comment added to the correct post

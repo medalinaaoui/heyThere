@@ -2,65 +2,101 @@ import { storiesData } from "../../data";
 import Story from "./Story";
 import { activeUser } from "../../data";
 import { AiFillPlusCircle } from "react-icons/ai";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/pagination";
-import { FreeMode } from "swiper/modules";
-// import { useState, useEffect } from "react";
-
+import { useState } from "react";
+import useAxiosPrivate from "../../hooks/usePrivateAxios";
+import useAxiosPrivate2 from "../../hooks/usePrivateAxios2";
+import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 const Stories = () => {
-  // const [slidesPerView, setSlidesPerView] = useState(6); // Default value for larger screens
+  const privateAxios = useAxiosPrivate();
+  const privateAxiosTwo = useAxiosPrivate2();
+  const [story, setStory] = useState("");
+  const user_id = useSelector((state) => state.auth.user.id);
+  const upload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("image", story);
+      const res = await privateAxiosTwo.post("/upload", formData);
+      console.log("res from upload Stories: ", res.data);
+      return res.data;
+    } catch (err) {
+      console.log("err from upload addpost: ", err);
+    }
+  };
 
-  // useEffect(() => {
-  //   // Function to update slidesPerView based on screen size
-  //   function updateSlidesPerView() {
-  //     const screenWidth = window.innerWidth;
-  //     // Set the number of slides based on the screen width
-  //     if (screenWidth <= 768) {
-  //       setSlidesPerView(3); // Set to 3 for smaller screens
-  //     } else {
-  //       setSlidesPerView(6); // Set to 6 for larger screens
-  //     }
-  //   }
+  const handleAddStory = async (e) => {
+    e.preventDefault();
 
-  //   // Initial call to set the number of slides
-  //   updateSlidesPerView();
+    if (!story) {
+      toast.error("you have to select a story", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    } else {
+      const imgUrl = await upload();
 
-  //   // Attach the event listener for window resize
-  //   window.addEventListener("resize", updateSlidesPerView);
+      try {
+        const req = await privateAxios.post("/addStory", {
+          user_id,
+          img: imgUrl,
+        });
+        console.log("req from addStory: ", req);
+        if (req.status === 200) {
+          toast(req.data.message, {
+            icon: "👏",
+            style: {
+              borderRadius: "10px",
+              background: "#333",
+              color: "#fff",
+            },
+          });
 
-  //   // Clean up the event listener when the component unmounts
-  //   return () => {
-  //     window.removeEventListener("resize", updateSlidesPerView);
-  //   };
-  // }, []);
+          setStory("");
+        }
+      } catch (error) {
+        if (error) console.log("error from addPost trycatch: ", error);
+      }
+    }
+  };
+
   return (
-    <div className="flex p-2 gap-4 overflow-x-auto lg:w-[746px] md:w-[300px] sm:w-[300px] w-[350px] scrollbar-thin scrollbar-thumb-black scrollbar-track-gray-300">
-      <div className="relative w-[5.4rem] h-32 " style={{ flexShrink: 0 }}>
-        <img
-          src={activeUser.personPic}
-          alt="activeUserPic"
-          className="bg-cover w-[5.4rem] h-32 rounded-md border-[1px] border-blue-500"
-        />
-        <span className="text-sm absolute bottom-1 left-1 text-white ">
-          <AiFillPlusCircle className="text-3xl text-blue-500" />
+    <div className="flex p-2 gap-4 overflow-x-auto  w-full scrollbar-thin scrollbar-thumb-black scrollbar-track-gray-300">
+      <div className="relative flex flex-col items-center">
+        <div class="w-[4.4rem] h-[4.4rem] border-2 border-blue-500 rounded-full"></div>
+        <div
+          className="w-16 h-16 rounded-full overflow-hidden absolute inset-[0.2rem]"
+          style={{ flexShrink: 0 }}
+        >
+          <img
+            src={activeUser.personPic}
+            alt="activeUserPic"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <span className="text-sm absolute bottom-4 left-1 text-white ">
+          <label htmlFor="fileInput">
+            <AiFillPlusCircle className="text-3xl text-blue-500" />
+            <input
+              type="file"
+              id="fileInput"
+              accept="image/*"
+              style={{ display: "none" }}
+              onChange={(e) => setStory(e.target.files[0])}
+            />
+          </label>
         </span>
+        <span className="text-sm  text-white ">Your story</span>
+        <button onClick={handleAddStory}>Add Story</button>
       </div>
-      <Swiper
-        slidesPerView={6}
-        spaceBetween={0}
-        freeMode={true}
-        modules={[FreeMode]}
-        className="mySwiper"
-      >
+
+      <div className="flex gap-1">
         {storiesData.map((s, i) => (
-          <SwiperSlide>
-            <Story story={s} key={i} />
-          </SwiperSlide>
+          <Story story={s} />
         ))}
-      </Swiper>
+      </div>
     </div>
   );
 };
