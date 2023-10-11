@@ -71,11 +71,19 @@ function App() {
       children: [
         {
           path: "/",
-          element: <Home />,
+          element: (
+            <Suspense fallback={<div> Loading... </div>}>
+              <Home />
+            </Suspense>
+          ),
         },
         {
           path: "/profile/:id",
-          element: <Profile />,
+          element: (
+            <Suspense fallback={<div> Loading... </div>}>
+              <Profile />
+            </Suspense>
+          ),
         },
       ],
     },
