@@ -1,8 +1,8 @@
 const apiUrl = {
-  baseUrl: "http://localhost:8800/api",
-  login: "http://localhost:8800/api/login",
-  register: "http://localhost:8800/api/register",
-  logout: "http://localhost:8800/api/logout",
+  baseUrl: "https://hey-there-api-fc5a5cd59152.herokuapp.com/api",
+  login: "https://hey-there-api-fc5a5cd59152.herokuapp.com/api/login",
+  register: "https://hey-there-api-fc5a5cd59152.herokuapp.com/api/register",
+  logout: "https://hey-there-api-fc5a5cd59152.herokuapp.com/api/logout",
 };
 
 export const FULLNAME_REGEX = /^(?:[A-Za-z'-]+\s*)+$/;

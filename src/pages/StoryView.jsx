@@ -1,11 +1,18 @@
-const StoryView = ({ imageSrc, onHide }) => (
-  <div
-    className="fixed top-0 left-0 w-screen h-screen flex justify-center items-center bg-black bg-opacity-80 z-50"
-    onClick={onHide}
-  >
-    <div className=" h-full px-32">
-      <img src={imageSrc} alt="story pic" />
+const StoryView = ({ imageUrl, onClose }) => {
+  return (
+    <div
+      onClick={onClose}
+      className="fixed inset-0 flex items-center justify-center z-50"
+    >
+      <div className="absolute inset-0 bg-black opacity-60" />
+
+      <img
+        src={`../../public/upload/${imageUrl}`}
+        alt="Full Screen Image"
+        className="max-h-screen max-w-screen h-auto"
+      />
     </div>
-  </div>
-);
+  );
+};
+
 export default StoryView;
