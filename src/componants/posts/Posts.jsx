@@ -25,13 +25,13 @@ const Posts = () => {
 
   return (
     <section>
+      <AddPost fetchPosts={fetchPosts} />
       {isLoading ? (
         <p>Loading</p>
       ) : posts.length === 0 ? (
         <p>No posts for now</p>
       ) : (
         <div>
-          <AddPost fetchPosts={fetchPosts} />
           {posts?.map((p, i) => (
             <Suspense
               key={i}
