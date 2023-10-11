@@ -71,29 +71,29 @@ function App() {
       children: [
         {
           path: "/",
-          element: (
-            <Suspense fallback={<div> Loading... </div>}>
-              <Home />
-            </Suspense>
-          ),
+          element: <Home />,
         },
         {
           path: "/profile/:id",
-          element: (
-            <Suspense fallback={<div> Loading... </div>}>
-              <Profile />
-            </Suspense>
-          ),
+          element: <Profile />,
         },
       ],
     },
     {
       path: "/login",
-      element: <Login />,
+      element: (
+        <Suspense fallback={<div> Loading... </div>}>
+          <Login />
+        </Suspense>
+      ),
     },
     {
       path: "/register",
-      element: <Register />,
+      element: (
+        <Suspense fallback={<div> Loading... </div>}>
+          <Register />
+        </Suspense>
+      ),
     },
     {
       path: "/settings/user/:id",
