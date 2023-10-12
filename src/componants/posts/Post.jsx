@@ -163,7 +163,7 @@ const Post = ({ fetchPosts, post, fromprofile }) => {
         <div className="flex gap-4 items-center">
           <Link to={`/profile/${post.userId}`}>
             <img
-              src={`../../public/upload/${profilePic}`}
+              src={profilePic}
               alt="profilepic"
               className=" w-8 aspect-square rounded-full"
             />
@@ -204,7 +204,7 @@ const Post = ({ fetchPosts, post, fromprofile }) => {
       </div>
       <div className={`${post.img ? "w-full h-auto" : "hidden"}`}>
         <img
-          src={`../../../public/upload/${post.img}`}
+          src={post.img}
           alt="postpic"
           className=" object-contain h-full w-full"
           loading="lazy"

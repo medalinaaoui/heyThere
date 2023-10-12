@@ -4,9 +4,12 @@ import { BiMessageSquare, BiMenuAltRight } from "react-icons/bi";
 import { IoIosNotifications } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
+import { useState } from "react";
 
 const Navbar = ({ setShowLogoutCheck, confirm }) => {
   const navigate = useNavigate();
+  //todo: menu logic for small devices
+  const [menu, setMenu] = useState(false);
 
   if (confirm) {
     navigate("/login");

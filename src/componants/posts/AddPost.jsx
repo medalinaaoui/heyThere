@@ -67,14 +67,13 @@ const AddPost = ({ fetchPosts }) => {
       <div className="flex justify-between px-2">
         <div className="flex gap-2 items-center relative">
           <img
-            src={`../../public/upload/${profilePic}`}
+            src={profilePic}
             alt="profilepic"
             className=" w-8 aspect-square rounded-full"
           />
           <div className="flex flex-col">
             <h2 className=" text-sm truncate">{username}</h2>
           </div>
-          <div className="h-3 w-3 rounded-full bg-green-500 absolute top-6 right-10"></div>
         </div>
       </div>
       <div className="px-2 p-3 relative flex-1">

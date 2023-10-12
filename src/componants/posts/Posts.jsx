@@ -1,6 +1,5 @@
 import { useEffect, useState, lazy, Suspense } from "react";
 const Post = lazy(() => import("./Post"));
-// const AddPost = lazy(() => import("./AddPost"));
 import usePrivateAxios from "../../hooks/usePrivateAxios";
 import AddPost from "./AddPost";
 const Posts = () => {
@@ -11,7 +10,6 @@ const Posts = () => {
     try {
       const response = await privateAxios.get("/posts");
       setPosts(response.data);
-      console.log(response.data);
       setIsLoading(false);
     } catch (error) {
       if (error) console.log("err from posts try catch: ", error);
@@ -25,13 +23,13 @@ const Posts = () => {
 
   return (
     <section>
+      <AddPost fetchPosts={fetchPosts} />
       {isLoading ? (
         <p>Loading</p>
       ) : posts.length === 0 ? (
         <p>No posts for now</p>
       ) : (
         <div>
-          <AddPost fetchPosts={fetchPosts} />
           {posts?.map((p, i) => (
             <Suspense
               key={i}
