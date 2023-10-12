@@ -99,7 +99,7 @@ const Login = () => {
               value={username}
               onChange={handleUsernameChange}
               placeholder="username"
-              className=" outline-none bg-inherit border-b-[1px]"
+              className=" outline-none bg-inherit border-b-[1px] text-white"
               autocomplete="off"
             ></input>
             <input
@@ -108,7 +108,7 @@ const Login = () => {
               value={password}
               onChange={handlePasswordChange}
               placeholder="********"
-              className=" outline-none bg-inherit border-b-[1px]"
+              className=" outline-none bg-inherit border-b-[1px] text-white"
             />
 
             <div className="flex flex-col gap-1">
@@ -122,6 +122,11 @@ const Login = () => {
               <span className=" hover:animate-pulse cursor-pointer text-sm">
                 Forgot Password?
               </span>
+              <Link to={"/register"} className="flex sm:hidden">
+                <span className=" hover:animate-pulse cursor-pointer text-sm">
+                  You don't have an account?
+                </span>
+              </Link>
             </div>
             <div
               className={errMsg ? "pt-4 flex items-center gap-1" : "invisible"}

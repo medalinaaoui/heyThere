@@ -178,7 +178,7 @@ const Register = () => {
                 onFocus={() => setUserFullNameFocus(true)}
                 onBlur={() => setUserFullNameFocus(false)}
                 placeholder="Full Name"
-                className=" outline-none bg-inherit border-b-[1px] sm:placeholder-slate-400 placeholder-[#ffffffda]"
+                className=" outline-none bg-inherit border-b-[1px] sm:placeholder-slate-400 text-white placeholder-[#ffffffda]"
               />
               <p
                 id="ufidnote"
@@ -226,7 +226,7 @@ const Register = () => {
                   onBlur={() => setUserFocus(false)}
                   name="username"
                   placeholder="Username"
-                  className=" outline-none bg-inherit border-b-[1px] sm:placeholder-slate-400 placeholder-[#ffffffda]"
+                  className=" outline-none bg-inherit text-white border-b-[1px] sm:placeholder-slate-400 placeholder-[#ffffffda]"
                 />
               </label>
               <p
@@ -274,7 +274,7 @@ const Register = () => {
                   id="email"
                   type="email"
                   placeholder="Email"
-                  className=" outline-none bg-inherit border-b-[1px] sm:placeholder-slate-400 placeholder-[#ffffffda]"
+                  className=" outline-none bg-inherit text-white border-b-[1px] sm:placeholder-slate-400 placeholder-[#ffffffda]"
                 />
               </label>
               <p
@@ -321,7 +321,7 @@ const Register = () => {
                   onBlur={() => setPasswordFocus(false)}
                   name="password"
                   placeholder="Password"
-                  className=" outline-none bg-inherit border-b-[1px] sm:placeholder-slate-400 placeholder-[#ffffffda]"
+                  className=" outline-none bg-inherit text-white border-b-[1px] sm:placeholder-slate-400 placeholder-[#ffffffda]"
                 />
               </label>
 
@@ -373,7 +373,7 @@ const Register = () => {
                   aria-describedby="confirmnote"
                   onFocus={() => setMatchFocus(true)}
                   onBlur={() => setMatchFocus(false)}
-                  className="outline-none bg-inherit border-b-[1px] sm:placeholder-slate-400 placeholder-[#ffffffda]"
+                  className="outline-none bg-inherit text-white border-b-[1px] sm:placeholder-slate-400 placeholder-[#ffffffda]"
                 />
               </label>
               <p
