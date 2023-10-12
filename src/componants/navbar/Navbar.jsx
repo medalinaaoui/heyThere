@@ -38,7 +38,12 @@ const Navbar = ({ setShowLogoutCheck, confirm }) => {
           </div>
           <div className="md:hidden flex gap-6">
             <FaSearch className="text-xl " />
-            <BiMenuAltRight className="text-2xl" />
+            {/* // todo: changes for now */}
+            <AiOutlineLogout
+              className="text-2xl font-bold cursor-pointer"
+              onClick={() => setShowLogoutCheck(true)}
+            />
+            {/* <BiMenuAltRight className="text-2xl" /> */}
           </div>
         </div>
       </div>
