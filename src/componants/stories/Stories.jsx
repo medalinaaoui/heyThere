@@ -1,4 +1,3 @@
-import { storiesData } from "../../data";
 import Story from "./Story";
 import { activeUser } from "../../data";
 import { AiFillPlusCircle } from "react-icons/ai";
