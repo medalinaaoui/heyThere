@@ -54,7 +54,7 @@ const Comment = ({ comment, fetchComments }) => {
     <div className="flex justify-between">
       <div className="flex gap-6 items-start">
         <img
-          src={`../../public/upload/${comment.profilePic}`}
+          src={comment.profilePic}
           alt="profilepic"
           className=" w-8 aspect-square rounded-full"
         />

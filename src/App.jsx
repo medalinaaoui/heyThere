@@ -2,9 +2,7 @@ import { lazy, Suspense } from "react";
 import "./index.css";
 import "./App.css";
 import { Toaster } from "react-hot-toast";
-import { useSelector } from "react-redux";
 import StayLoggedIn from "./pages/StayLoggedIn";
-// import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import useAxiosPrivate from "./hooks/usePrivateAxios";
 import { logout } from "./features/user/userSlice";
@@ -27,11 +25,9 @@ const Register = lazy(() => import("./pages/Register"));
 const LogoutCheck = lazy(() => import("./pages/LogoutCheck"));
 
 function App() {
-  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const privateAxios = useAxiosPrivate();
 
-  // const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const [showLogoutCheck, setShowLogoutCheck] = useState(false);
   const [confirm, setConfirm] = useState(false);
 

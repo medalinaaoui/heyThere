@@ -69,13 +69,13 @@ const Profile = () => {
         <>
           <div className="relative w-full aspect-video mb-12 ">
             <img
-              src={`../../public/upload/${coverPic}`}
+              src={coverPic}
               alt="cover img"
               className=" object-cover w-full h-full rounded-md"
             />
             <div className="md:w-40 sm:w-36  w-28 aspect-square rounded-full absolute bottom-[-20%]">
               <img
-                src={`../../public/upload/${profilePic}`}
+                src={profilePic}
                 alt="profile pic"
                 className=" object-cover w-full h-full rounded-full border-4 border-backg "
               />

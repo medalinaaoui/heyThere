@@ -43,6 +43,8 @@ const Stories = () => {
     }
   };
 
+  // todo mage add story
+
   const handleAddStory = async (e) => {
     e.preventDefault();
 
@@ -108,7 +110,6 @@ const Stories = () => {
           </label>
         </span>
         <span className="text-sm  text-white ">Your story</span>
-        <button onClick={handleAddStory}>Add Story</button>
       </div>
       {isLoading ? (
         <div> Loading...</div>

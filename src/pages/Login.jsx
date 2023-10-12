@@ -20,7 +20,6 @@ const Login = () => {
   };
 
   const validUsername = USERNAME_REGEX.test(username);
-  // const validPassword = PASSWORD_REGEX.test(password);
   useEffect(() => {
     if (!username || !password) {
       setValidInput(false);
@@ -82,7 +81,7 @@ const Login = () => {
             </span>
           </Link>
           <Link to="/register">
-            <button className="duration-500 w-fit px-12 border-none btn btn-sm bg-accentc text-secondarybg hover:text-accentc hover:bg-secondarybg">
+            <button className="duration-500 w-fit px-12 border-none text-sm py-1 font-semibold rounded-md  bg-accentc text-secondarybg hover:text-accentc hover:bg-secondarybg">
               Register
             </button>
           </Link>
@@ -101,6 +100,7 @@ const Login = () => {
               onChange={handleUsernameChange}
               placeholder="username"
               className=" outline-none bg-inherit border-b-[1px]"
+              autocomplete="off"
             ></input>
             <input
               type="password"
@@ -115,7 +115,7 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={!validInput}
-                className="duration-500 border-none w-fit px-12 btn btn-sm bg-accentc text-secondarybg hover:text-accentc hover:bg-secondarybg"
+                className="duration-500 w-fit px-12 border-none text-sm py-1 font-semibold rounded-md  bg-accentc text-secondarybg hover:text-accentc hover:bg-secondarybg"
               >
                 Submit
               </button>

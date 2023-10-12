@@ -54,7 +54,7 @@ const Reqs = () => {
             <div className="flex gap-6 items-center">
               <Link to={`/profile/${e.id}`}>
                 <img
-                  src={`../../public/upload/${e.profilePic}`}
+                  src={e.profilePic}
                   alt="profilepic"
                   className=" w-8 aspect-square rounded-full"
                 />

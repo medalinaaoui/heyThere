@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { register } from "../features/user/userSlice";
 import { useRef, useState, useEffect } from "react";
 import {
@@ -10,6 +10,8 @@ import {
 } from "../config/varsConfig";
 import axios from "../features/user/axios";
 import { BiError } from "react-icons/bi";
+import { GiCancel } from "react-icons/gi";
+import { BsFillCheckCircleFill } from "react-icons/bs";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -64,6 +66,7 @@ const Register = () => {
   }, [user, userFullName, email, password, matchPassword]);
 
   const handleSubmit = async (e) => {
+    console.log("submit");
     e.preventDefault();
     const v1 = FULLNAME_REGEX.test(userFullName);
     const v2 = USERNAME_REGEX.test(user);
@@ -76,7 +79,7 @@ const Register = () => {
     try {
       const response = await axios.post("/register", {
         name: userFullName,
-        username: user,
+        username: user.toLowerCase(),
         email,
         password,
       });
@@ -112,7 +115,7 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center h-screen sm:px-80 login-page ">
-      <div className="flex text-textc h-[67%] gap-16  bg-backg px-12 py-12 rounded-2xl bg-image-center">
+      <div className="flex text-textc h-[78%] gap-16  bg-backg px-12 py-12 rounded-2xl bg-image-center">
         <div className="hidden sm:flex flex-col justify-around w-1/2">
           <h1 className="text-6xl font-bold">
             Hey <br /> There!!!
@@ -130,7 +133,7 @@ const Register = () => {
             </span>
           </Link>
           <Link to="/login">
-            <button className="duration-500 w-fit px-12 border-none btn btn-sm bg-accentc text-secondarybg hover:text-accentc hover:bg-secondarybg">
+            <button className="duration-500 w-fit px-12 border-none text-sm py-1 font-semibold rounded-md  bg-accentc text-secondarybg hover:text-accentc hover:bg-secondarybg">
               Login
             </button>
           </Link>
@@ -145,19 +148,21 @@ const Register = () => {
               <label htmlFor="fullname">
                 <span
                   className={
-                    validFullName ? "flex absolute right-0" : " hidden"
+                    validFullName
+                      ? "flex absolute right-2 md:right-16 bottom-[0.61rem] border-green-500 text-green-500"
+                      : " hidden"
                   }
                 >
-                  check
+                  <BsFillCheckCircleFill />
                 </span>
                 <span
                   className={
                     validFullName || !userFullName
                       ? "hidden"
-                      : "flex absolute right-0"
+                      : "flex absolute right-2 md:right-16 bottom-[0.61rem] border-red-500 text-red-500"
                   }
                 >
-                  X
+                  <GiCancel />
                 </span>
               </label>
               <input
@@ -175,32 +180,38 @@ const Register = () => {
                 placeholder="Full Name"
                 className=" outline-none bg-inherit border-b-[1px] sm:placeholder-slate-400 placeholder-[#ffffffda]"
               />
-              {/* <p
+              <p
                 id="ufidnote"
                 className={
-                  userFullNameFocus && userFullName && !validFullName
-                    ? "text-xs font-light text-red-500"
+                  !userFullNameFocus && userFullName && !validFullName
+                    ? "hidden xl:flex text-xs font-light text-white absolute top-9"
                     : "hidden"
                 }
               >
                 Please enter a valid full name. It should consist of letters,
                 hyphens, and apostrophes only.
-              </p> */}
+              </p>
             </div>
 
             <div className="relative">
               <label htmlFor="usename">
                 <span
-                  className={validName ? "flex absolute right-0" : " hidden"}
+                  className={
+                    validName
+                      ? "flex absolute right-2 md:right-16 bottom-[0.61rem] border-green-500 text-green-500"
+                      : " hidden"
+                  }
                 >
-                  check
+                  <BsFillCheckCircleFill />
                 </span>
                 <span
                   className={
-                    validName || !user ? "hidden" : "flex absolute right-0"
+                    validName || !user
+                      ? "hidden"
+                      : "flex absolute right-2 md:right-16 bottom-[0.61rem] border-red-500 text-red-500"
                   }
                 >
-                  X
+                  <GiCancel />
                 </span>
                 <input
                   type="text"
@@ -218,33 +229,38 @@ const Register = () => {
                   className=" outline-none bg-inherit border-b-[1px] sm:placeholder-slate-400 placeholder-[#ffffffda]"
                 />
               </label>
-              {/* <p
+              <p
                 id="uidnote"
                 className={
-                  userFocus && user && !validName
-                    ? "text-xs font-light text-red-500"
+                  !userFocus && user && !validName
+                    ? "hidden xl:flex text-xs font-light text-white absolute top-9"
                     : "hidden"
                 }
               >
-                Please enter a valid username. It should consist of letters,
-                numbers, periods, and underscores only, and be between 1 and 30
-                characters in length.
-              </p> */}
+                It should consist of letters, numbers, periods, and underscores
+                only.
+              </p>
             </div>
 
             <div className=" relative">
               <label htmlFor="email">
                 <span
-                  className={validEmail ? "flex absolute right-0" : " hidden"}
+                  className={
+                    validEmail
+                      ? "flex absolute right-2 md:right-16 bottom-[0.61rem] border-green-500 text-green-500"
+                      : " hidden"
+                  }
                 >
-                  check
+                  <BsFillCheckCircleFill />
                 </span>
                 <span
                   className={
-                    validEmail || !email ? "hidden" : "flex absolute right-0"
+                    validEmail || !email
+                      ? "hidden"
+                      : "flex absolute right-2 md:right-16 bottom-[0.61rem] border-red-500 text-red-500"
                   }
                 >
-                  X
+                  <GiCancel />
                 </span>
                 <input
                   autoComplete="off"
@@ -261,37 +277,37 @@ const Register = () => {
                   className=" outline-none bg-inherit border-b-[1px] sm:placeholder-slate-400 placeholder-[#ffffffda]"
                 />
               </label>
-              {/* <p
+              <p
                 id="emailnote"
                 className={
-                  emailFocus && email && !validEmail
-                    ? "text-xs font-light text-red-500"
+                  !emailFocus && email && !validEmail
+                    ? "hidden xl:flex text-xs font-light text-white absolute top-9"
                     : "hidden"
                 }
               >
-                Please enter a valid email address. It should be in the format
-                user@example.com and must consist of letters, numbers, periods,
-                and hyphens only, with a valid domain.
-              </p> */}
+                It should be in the format user@example.com
+              </p>
             </div>
 
             <div className=" relative">
               <label htmlFor="password">
                 <span
                   className={
-                    validPassword ? "flex absolute right-0" : " hidden"
+                    validPassword
+                      ? "flex absolute right-2 md:right-16 bottom-[0.61rem] border-green-500 text-green-500"
+                      : " hidden"
                   }
                 >
-                  check
+                  <BsFillCheckCircleFill />
                 </span>
                 <span
                   className={
                     validPassword || !password
                       ? "hidden"
-                      : "flex absolute right-0"
+                      : "flex absolute right-2 md:right-16 bottom-[0.61rem] border-red-500 text-red-500"
                   }
                 >
-                  X
+                  <GiCancel />
                 </span>
                 <input
                   type="password"
@@ -309,23 +325,21 @@ const Register = () => {
                 />
               </label>
 
-              {/* <p
+              <p
                 id="passwordnote"
                 className={
-                  passwordFocus && !validPassword
-                    ? "text-xs font-light text-red-500"
+                  !passwordFocus && password && !validPassword
+                    ? "hidden xl:flex text-xs font-light text-white absolute top-9"
                     : "hidden"
                 }
               >
-                Please enter a valid password. It should be 8 to 24 characters
-                long and include at least one lowercase letter, one uppercase
-                letter, one digit, and one special character
+                8 to 24 characters long & include
                 <span aria-label="exclamation mark">!</span>{" "}
                 <span aria-label="at symbol">@</span>{" "}
                 <span aria-label="hashtag">#</span>{" "}
                 <span aria-label="dollar sign">$</span>{" "}
                 <span aria-label="percent">%</span>
-              </p> */}
+              </p>
             </div>
 
             <div className=" relative">
@@ -333,20 +347,20 @@ const Register = () => {
                 <span
                   className={
                     validMatch && matchPassword
-                      ? "flex absolute right-0"
+                      ? "flex absolute right-2 md:right-16 bottom-[0.61rem] border-green-500 text-green-500"
                       : " hidden"
                   }
                 >
-                  check
+                  <BsFillCheckCircleFill />
                 </span>
                 <span
                   className={
                     validMatch || !matchPassword
                       ? "hidden"
-                      : "flex absolute right-0"
+                      : "flex absolute right-2 md:right-16 bottom-[0.61rem] border-red-500 text-red-500"
                   }
                 >
-                  X
+                  <GiCancel />
                 </span>
                 <input
                   type="password"
@@ -362,24 +376,30 @@ const Register = () => {
                   className="outline-none bg-inherit border-b-[1px] sm:placeholder-slate-400 placeholder-[#ffffffda]"
                 />
               </label>
-              {/* <p
+              <p
                 id="confirmnote"
                 className={
-                  matchFocus && !validMatch
-                    ? "text-xs font-light text-red-500"
+                  !matchFocus && matchPassword && !validMatch
+                    ? " hidden xl:flex text-xs font-light text-white absolute top-9"
                     : "hidden"
                 }
               >
                 Must match the first password input field.
-              </p> */}
+              </p>
             </div>
 
             <button
               type="submit"
               disabled={
-                !validName || !validPassword || !validMatch ? true : false
+                !validName ||
+                !validFullName ||
+                !validEmail ||
+                !validPassword ||
+                !validMatch
+                  ? true
+                  : false
               }
-              className=" duration-500 border-none w-fit px-12 btn btn-sm bg-accentc text-secondarybg hover:text-accentc hover:bg-secondarybg"
+              className="duration-500 w-fit px-12 border-none text-sm py-1 font-semibold rounded-md  bg-accentc text-secondarybg hover:text-accentc hover:bg-secondarybg"
             >
               Submit
             </button>
